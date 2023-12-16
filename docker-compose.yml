@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    container_name: "log-manager-service"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/log-manager
+
+  db:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+      - ./.docker/init:/docker-entrypoint-initdb.d
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=test
+      - MONGO_INITDB_USERNAME=test
+      - MONGO_INITDB_PASSWORD=test
+
+networks:
+  webnet:
