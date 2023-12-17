@@ -1,6 +1,6 @@
 import request from "supertest";
 
-import { App } from "@/presentation/app";
+import { App } from "@/app";
 
 describe("App", () => {
   const app = new App().server;
