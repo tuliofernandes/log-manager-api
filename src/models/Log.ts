@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 
-interface ILog {
+export interface ILog {
   ip: string;
   date: Date;
   time: Date;
@@ -8,6 +8,8 @@ interface ILog {
   version: string;
   description: string;
 }
+
+export interface ILogDocument extends ILog, Document {}
 
 const logSchema = new Schema({
   ip: { type: String, required: true },
@@ -18,6 +20,4 @@ const logSchema = new Schema({
   description: { type: String, required: true },
 });
 
-const Log = model<ILog>("Log", logSchema);
-
-export { Log, ILog };
+export const Log = model<ILog>("Log", logSchema);
