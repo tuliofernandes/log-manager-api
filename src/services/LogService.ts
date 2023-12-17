@@ -9,7 +9,7 @@ interface ILogService {
 }
 
 export class LogService implements ILogService {
-  constructor(private readonly logrepository: LogRepository) {} // TODO: Dependency inversion (ILogRepository)
+  constructor(private readonly logRepository: LogRepository) {} // Use camelCase for variable names
 
   async parseLogs(data: string): Promise<ILog[]> {
     const lines: string[] = data.split("\n");
@@ -39,10 +39,10 @@ export class LogService implements ILogService {
   }
 
   async saveLogs(logs: ILog[]): Promise<void> {
-    await this.logrepository.createMany(logs);
+    await this.logRepository.createMany(logs);
   }
 
-  public async parseAndSaveLogs(data: string): Promise<void> {
+  async parseAndSaveLogs(data: string): Promise<void> {
     const logs = await this.parseLogs(data);
     await this.saveLogs(logs);
   }
