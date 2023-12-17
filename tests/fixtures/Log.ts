@@ -1,49 +1,40 @@
 import { ILog } from "@/models/Log";
 
+export const logsFixtureCsv = `
+109.76.175.111;27-Feb-2022;22:29:32.000;Sonsing;8.8;174766704-8;De-engineered optimizing forecast;in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non
+      178.8.106.32;22-Jan-2023;3:44:53.000;Sonair;6.1.8;596167229-8;De-engineered intangible knowledge base;metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra
+      240.246.127.13;30-Mar-2022;16:34:08.000;Asoka;0.50;640612225-9;Diverse foreground challenge;nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor
+`;
+
 export const logsFixture: ILog[] = [
   {
-    ip: "64.165.65.198",
-    date: new Date("2023-01-15"),
-    time: new Date("1970-01-01T20:29:57.000Z"),
-    type: "Zamit",
-    version: "6.99",
+    logId: "174766704-8",
+    ip: "109.76.175.111",
+    datetime: new Date("2022-02-28T01:29:32.000Z"),
+    type: "Sonsing",
+    version: "8.8",
+    title: "De-engineered optimizing forecast",
     description:
-      "Configurable needs-based array;ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam augue quam",
+      "in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non",
   },
   {
-    ip: "58.94.79.70",
-    date: new Date("2022-05-07"),
-    time: new Date("1970-01-01T03:09:19.000Z"),
-    type: "Gembucket",
-    version: "3.98",
+    logId: "596167229-8",
+    ip: "178.8.106.32",
+    datetime: new Date("2023-01-22T06:44:53.000Z"),
+    type: "Sonair",
+    version: "6.1.8",
+    title: "De-engineered intangible knowledge base",
     description:
-      "Digitized foreground initiative;ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae",
+      "metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra",
   },
   {
-    ip: "67.59.35.39",
-    date: new Date("2022-03-19"),
-    time: new Date("1970-01-01T20:07:52.000Z"),
-    type: "Latlux",
-    version: "0.8.8",
+    logId: "640612225-9",
+    ip: "240.246.127.13",
+    datetime: new Date("2022-03-30T19:34:08.000Z"),
+    type: "Asoka",
+    version: "0.50",
+    title: "Diverse foreground challenge",
     description:
-      "Focused mobile secured line;in hac habitasse platea dictumst etiam faucibus cursus urna ut",
-  },
-  {
-    ip: "248.35.228.185",
-    date: new Date("2022-12-05"),
-    time: new Date("1970-01-01T00:37:52.000Z"),
-    type: "Subin",
-    version: "7.9",
-    description:
-      "Multi-channelled responsive implementation;ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti",
-  },
-  {
-    ip: "92.70.41.229",
-    date: new Date("2023-01-09"),
-    time: new Date("1970-01-01T01:04:36.000Z"),
-    type: "Overhold",
-    version: "0.79",
-    description:
-      "Secured analyzing matrices;dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi",
+      "nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor",
   },
 ];

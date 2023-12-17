@@ -9,7 +9,7 @@ interface ILogService {
 }
 
 export class LogService implements ILogService {
-  constructor(private readonly logrepository: LogRepository) {}
+  constructor(private readonly logrepository: LogRepository) {} // TODO: Dependency inversion (ILogRepository)
 
   async parseLogs(data: string): Promise<ILog[]> {
     const lines: string[] = data.split("\n");
