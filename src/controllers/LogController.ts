@@ -1,3 +1,4 @@
+import { BadRequestError } from "@/errors/BadRequestError";
 import { Request, Response } from "express";
 
 interface IController {
@@ -10,7 +11,7 @@ export class UploadLogsController implements IController {
       const { files } = request;
 
       if (!files || files.length === 0) {
-        throw new Error("BadRequest: 'files' invalid or not provided");
+        throw new BadRequestError("'files' invalid or not provided");
       }
 
       return response.json({});

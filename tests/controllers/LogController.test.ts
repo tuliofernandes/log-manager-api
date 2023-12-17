@@ -13,7 +13,7 @@ describe("[Controller] LogController", () => {
 
       expect(response.status).toBe(400);
       expect(response.body).toEqual({
-        error: "BadRequest: 'files' invalid or not provided",
+        error: "BadRequestError: 'files' invalid or not provided",
       });
     });
   });
