@@ -1,25 +1,23 @@
-import mongoose, { Document, Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
-export interface ILog extends Document {
-  ipAddress: string;
+interface ILog {
+  ip: string;
   date: Date;
-  application: string;
+  time: Date;
+  type: string;
   version: string;
-  userId: string;
-  message: string;
-  uploadId: mongoose.Types.ObjectId;
+  description: string;
 }
 
-const LogSchema: Schema = new Schema({
-  ipAddress: { type: String, required: true },
+const logSchema = new Schema({
+  ip: { type: String, required: true },
   date: { type: Date, required: true },
-  application: { type: String, required: true },
+  time: { type: Date, required: true },
+  type: { type: String, required: true },
   version: { type: String, required: true },
-  userId: { type: String, required: true },
-  message: { type: String, required: true },
-  uploadId: { type: mongoose.Types.ObjectId, ref: "Upload" },
+  description: { type: String, required: true },
 });
 
-const Log = mongoose.model<ILog>("Log", LogSchema);
+const Log = model<ILog>("Log", logSchema);
 
-export default Log;
+export { Log, ILog };
