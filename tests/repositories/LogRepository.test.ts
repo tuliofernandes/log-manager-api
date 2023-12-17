@@ -4,6 +4,7 @@ import { connectDatabase } from "@/config/database/client";
 
 import { LogRepository } from "@/repositories/LogRepository";
 import { Log } from "@/models/Log";
+import { logsFixture } from "@/tests/fixtures/Log";
 
 describe("[Repository] Log", () => {
   beforeAll(async () => {
@@ -17,43 +18,35 @@ describe("[Repository] Log", () => {
 
   const sut = new LogRepository();
 
-  const logFixture = {
-    ip: "192.168.0.11",
-    date: new Date(),
-    time: new Date(),
-    type: "valid_type",
-    version: "1.0.0",
-    description: "blabla",
-  };
-
-  it("should call mongoose create method with correct values", async () => {
+  it("should call mongoose insertMany method with correct values", async () => {
     jest.mock("@/models/Log");
 
-    const createSpy = jest.spyOn(Log, "create");
+    const createSpy = jest.spyOn(Log, "insertMany");
 
-    await sut.insert(logFixture);
+    await sut.createMany(logsFixture);
 
-    expect(createSpy).toHaveBeenCalledWith(logFixture);
+    expect(createSpy).toHaveBeenCalledWith(logsFixture);
 
     jest.restoreAllMocks();
   });
 
   it("should throw on a database error", async () => {
-    jest.spyOn(Log, "create").mockImplementationOnce(async () => {
+    jest.spyOn(Log, "insertMany").mockImplementationOnce(async () => {
       throw new Error("mongo connection error");
     });
 
-    const promise = sut.insert(logFixture);
+    const promise = sut.createMany(logsFixture);
 
     await expect(promise).rejects.toThrow(
       new Error("DatabaseError: mongo connection error")
     );
   });
 
-  it("should create a log in the database", async () => {
-    const created = await sut.insert(logFixture);
-
-    expect(created).toBeTruthy();
-    expect(created?.ip).toBe("192.168.0.11");
+  it("should create the logs in the database", async () => {
+    try {
+      await sut.createMany(logsFixture);
+    } catch (error) {
+      fail("Promise should not reject");
+    }
   });
 });

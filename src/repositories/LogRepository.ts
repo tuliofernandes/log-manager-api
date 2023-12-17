@@ -1,14 +1,12 @@
 import { DatabaseError } from "@/errors/DatabaseError";
-import { Log as LogSchema, ILog, ILogDocument } from "../models/Log";
+import { Log as LogSchema, ILog } from "../models/Log";
 
 export class LogRepository {
-  public async insert(log: ILog): Promise<ILogDocument> {
+  public async createMany(logs: ILog[]): Promise<void> {
     try {
-      const created = await LogSchema.create(log);
-      return created;
-    } catch (err) {
-      const error = err as Error;
-      throw new DatabaseError(error.message);
+      await LogSchema.insertMany(logs);
+    } catch (error) {
+      throw new DatabaseError((error as Error).message);
     }
   }
 }
