@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import morgan from "morgan";
 
-import { connectDatabase } from "../config/database/client";
-import UploadModel from "../models/Upload";
+import { connectDatabase } from "./config/database/client";
+import { Log } from "./models/Log";
 
 export class App {
   public server: express.Application;
@@ -30,9 +30,13 @@ export class App {
   private routes() {
     this.server.get("/", async (req: Request, res: Response) => {
       console.log("GET /");
-      const created = new UploadModel({
-        name: "Teste",
-        logs: [],
+      const created = new Log({
+        ip: "192.168.0.11",
+        date: new Date(),
+        time: new Date(),
+        type: "valid_type",
+        version: "1.0.0",
+        description: "blabla",
       });
 
       await created.save();

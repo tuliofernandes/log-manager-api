@@ -1,7 +1,4 @@
 import mongoose, { MongooseError } from "mongoose";
-import env from "../env";
-
-console.log({ url: env.DATABASE_URL });
 
 const connectDatabase = async () => {
   await mongoose
