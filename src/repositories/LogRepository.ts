@@ -1,3 +1,4 @@
+import { DatabaseError } from "@/errors/DatabaseError";
 import { Log as LogSchema, ILog } from "../models/Log";
 
 export class LogRepository {
@@ -7,7 +8,7 @@ export class LogRepository {
       return created;
     } catch (err) {
       const error = err as Error;
-      throw new Error(`DatabaseError: ${error.message}`);
+      throw new DatabaseError(error.message);
     }
   }
 }
