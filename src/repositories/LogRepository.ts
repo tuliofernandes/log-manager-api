@@ -1,4 +1,4 @@
-import { DatabaseError } from "@/errors/DatabaseError";
+import { DatabaseError } from "../errors/DatabaseError";
 import { Log as LogSchema, ILog } from "../models/Log";
 
 export class LogRepository {
