@@ -1,16 +1,18 @@
 import { DatabaseError } from "@/errors/DatabaseError";
 
 describe("DatabaseError", () => {
-  it("should set the error message correctly", () => {
-    const errorMessage = "An error occurred";
-    const error = new DatabaseError(errorMessage);
-
-    expect(error.message).toBe(errorMessage);
+  it("should have the correct name", () => {
+    const error = new DatabaseError("Test error");
+    expect(error.name).toBe("DatabaseError");
   });
 
-  it("should set the error name correctly", () => {
-    const error = new DatabaseError("");
+  it("should have the correct message", () => {
+    const error = new DatabaseError("Test error");
+    expect(error.message).toBe("DatabaseError: Test error");
+  });
 
-    expect(error.name).toBe("DatabaseError");
+  it("should be an instance of Error", () => {
+    const error = new DatabaseError("Test error");
+    expect(error).toBeInstanceOf(Error);
   });
 });
