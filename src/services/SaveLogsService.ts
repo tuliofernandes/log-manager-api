@@ -2,14 +2,16 @@ import { ILog } from "../models/Log";
 import { LogRepository } from "../repositories/LogRepository";
 import { parseDatetime } from "../utils/parseDatetime";
 
-interface ILogService {
-  parseAndSaveLogs(data: string): Promise<void>;
+interface ISaveLogsService {
+  parseAndSaveFromCsv(data: string): Promise<void>;
 }
 
-export class LogService implements ILogService {
+export class SaveLogsService implements ISaveLogsService {
   constructor(private readonly logRepository: LogRepository) {}
 
-  public async parseAndSaveLogs(data: string | Buffer): Promise<void> {
+  // TODO: tratar erros
+
+  public async parseAndSaveFromCsv(data: string | Buffer): Promise<void> {
     const logs = await this.parseLogs(data.toString());
     await this.saveLogs(logs);
   }

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 import { BadRequestError } from "../errors/BadRequestError";
 import { LogRepository } from "../repositories/LogRepository";
-import { LogService } from "../services/LogService";
+import { SaveLogsService } from "../services/SaveLogsService";
 
 interface IController {
   handle(request: Request, response: Response): Promise<Response>;
@@ -20,10 +20,10 @@ export class UploadLogsController implements IController {
       // TODO: Check if files are valid via mimetype
 
       const logRepository = new LogRepository();
-      const logService = new LogService(logRepository);
+      const saveLogsService = new SaveLogsService(logRepository);
 
       for (const file of files as Express.Multer.File[]) {
-        await logService.parseAndSaveLogs(file.buffer);
+        await saveLogsService.parseAndSaveFromCsv(file.buffer);
       }
 
       return response.status(201).send();

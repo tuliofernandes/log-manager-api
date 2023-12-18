@@ -3,9 +3,9 @@ import path from "path";
 import fs from "fs";
 
 import { App } from "@/app";
-import { LogService } from "@/services/LogService";
+import { SaveLogsService } from "@/services/SaveLogsService";
 
-jest.mock("@/services/LogService");
+jest.mock("@/services/SaveLogsService");
 
 describe("[Controller] LogController", () => {
   const app = new App();
@@ -35,8 +35,8 @@ describe("[Controller] LogController", () => {
 
     it("should be able to call LogService.parseAndSaveLogs with the files contents", async () => {
       const parseAndSaveLogsSpy = jest.spyOn(
-        LogService.prototype,
-        "parseAndSaveLogs"
+        SaveLogsService.prototype,
+        "parseAndSaveFromCsv"
       );
 
       await request(app.server)
