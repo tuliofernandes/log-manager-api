@@ -1,9 +1,9 @@
 import request from "supertest";
+import path from "path";
 import fs from "fs";
 
 import { App } from "@/app";
 import { LogService } from "@/services/LogService";
-import path from "path";
 
 jest.mock("@/services/LogService");
 
@@ -48,7 +48,7 @@ describe("[Controller] LogController", () => {
       expect(parseAndSaveLogsSpy).toHaveBeenCalledWith(file2Buffer);
     });
 
-    it("should be able to return 201 created if files ", async () => {
+    it("should be able to return 201 created after logs are created by the service", async () => {
       const response = await request(app)
         .post(routeUrl)
         .attach("files", "tests/fixtures/files/AccessLogs_1.log");

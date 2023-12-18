@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
-import { BadRequestError } from "@/errors/BadRequestError";
-import { LogRepository } from "@/repositories/LogRepository";
-import { LogService } from "@/services/LogService";
+import { BadRequestError } from "../errors/BadRequestError";
+import { LogRepository } from "../repositories/LogRepository";
+import { LogService } from "../services/LogService";
 
 interface IController {
   handle(request: Request, response: Response): Promise<Response>;
