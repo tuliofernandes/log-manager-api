@@ -1,6 +1,6 @@
 {
-  "name": "dev-diaries",
-  "description": "A minimalist boilerplate for a Node.js API, built on top of Express and written in TypeScript",
+  "name": "log-manager-api",
+  "description": "The log-manager back-end API",
   "version": "1.0.0",
   "license": "MIT",
   "dev-start": "nodemon",
