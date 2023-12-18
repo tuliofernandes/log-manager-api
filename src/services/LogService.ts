@@ -42,8 +42,8 @@ export class LogService implements ILogService {
     await this.logRepository.createMany(logs);
   }
 
-  async parseAndSaveLogs(data: string): Promise<void> {
-    const logs = await this.parseLogs(data);
+  async parseAndSaveLogs(data: string | Buffer): Promise<void> {
+    const logs = await this.parseLogs(data.toString());
     await this.saveLogs(logs);
   }
 }
