@@ -14,7 +14,7 @@ export class UploadLogsController implements IController {
         throw new BadRequestError("'files' invalid or not provided");
       }
 
-      return response.json({});
+      return response.status(201).send();
     } catch (error) {
       if ((error as Error).message.includes("BadRequest")) {
         return response.status(400).json({
