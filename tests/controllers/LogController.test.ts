@@ -5,19 +5,20 @@ import { App } from "@/app";
 import { LogService } from "@/services/LogService";
 import path from "path";
 
+jest.mock("@/services/LogService");
+
 describe("[Controller] LogController", () => {
   const app = new App().server;
-
-  beforeAll(async () => {
-    jest.mock("@/services/LogService");
-  });
 
   afterAll(async () => {
     jest.clearAllMocks();
   });
 
-  const logFileBuffer = fs.readFileSync(
+  const file1Buffer = fs.readFileSync(
     path.resolve(__dirname, "../fixtures/files/AccessLogs_1.log")
+  );
+  const file2Buffer = fs.readFileSync(
+    path.resolve(__dirname, "../fixtures/files/AccessLogs_2.log")
   );
 
   describe("POST /logs", () => {
@@ -40,9 +41,11 @@ describe("[Controller] LogController", () => {
 
       await request(app)
         .post(routeUrl)
-        .attach("files", "tests/fixtures/files/AccessLogs_1.log");
+        .attach("files", "tests/fixtures/files/AccessLogs_1.log")
+        .attach("files", "tests/fixtures/files/AccessLogs_2.log");
 
-      expect(parseAndSaveLogsSpy).toHaveBeenCalledWith(logFileBuffer);
+      expect(parseAndSaveLogsSpy).toHaveBeenCalledWith(file1Buffer);
+      expect(parseAndSaveLogsSpy).toHaveBeenCalledWith(file2Buffer);
     });
 
     it("should be able to return 201 created if files ", async () => {
