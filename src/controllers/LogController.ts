@@ -16,7 +16,7 @@ export class UploadLogsController implements IController {
 
       return response.status(201).send();
     } catch (error) {
-      if ((error as Error).message.includes("BadRequest")) {
+      if ((error as Error).message.includes("BadRequestError")) {
         return response.status(400).json({
           error: (error as Error).message,
         });
