@@ -7,7 +7,7 @@ import { SaveLogsService } from "@/services/SaveLogsService";
 
 jest.mock("@/services/SaveLogsService");
 
-describe("[Controller] LogController", () => {
+describe("[Controller] UploadLogsController", () => {
   const app = new App();
 
   afterAll(async () => {

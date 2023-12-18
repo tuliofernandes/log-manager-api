@@ -3,7 +3,7 @@ import morgan from "morgan";
 import multer, { Multer } from "multer";
 
 import { connectDatabase } from "./config/database/client";
-import { UploadLogsController } from "./controllers/LogController";
+import { UploadLogsController } from "./controllers/UploadLogsController";
 
 export class App {
   public server: express.Application;
