@@ -8,7 +8,7 @@ import { LogService } from "@/services/LogService";
 jest.mock("@/services/LogService");
 
 describe("[Controller] LogController", () => {
-  const app = new App().server;
+  const app = new App();
 
   afterAll(async () => {
     jest.clearAllMocks();
@@ -25,7 +25,7 @@ describe("[Controller] LogController", () => {
     const routeUrl = "/logs";
 
     it("should be able to return BadRequestError and 404 status code if no file(s) are provided", async () => {
-      const response = await request(app).post(routeUrl);
+      const response = await request(app.server).post(routeUrl);
 
       expect(response.status).toBe(400);
       expect(response.body).toEqual({
@@ -39,7 +39,7 @@ describe("[Controller] LogController", () => {
         "parseAndSaveLogs"
       );
 
-      await request(app)
+      await request(app.server)
         .post(routeUrl)
         .attach("files", "tests/fixtures/files/AccessLogs_1.log")
         .attach("files", "tests/fixtures/files/AccessLogs_2.log");
@@ -49,7 +49,7 @@ describe("[Controller] LogController", () => {
     });
 
     it("should be able to return 201 created after logs are created by the service", async () => {
-      const response = await request(app)
+      const response = await request(app.server)
         .post(routeUrl)
         .attach("files", "tests/fixtures/files/AccessLogs_1.log");
 
