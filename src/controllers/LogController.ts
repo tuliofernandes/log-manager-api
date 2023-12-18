@@ -1,7 +1,8 @@
+import { Request, Response } from "express";
+
 import { BadRequestError } from "@/errors/BadRequestError";
 import { LogRepository } from "@/repositories/LogRepository";
 import { LogService } from "@/services/LogService";
-import { Request, Response } from "express";
 
 interface IController {
   handle(request: Request, response: Response): Promise<Response>;
@@ -10,7 +11,7 @@ interface IController {
 export class UploadLogsController implements IController {
   public async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const files = request.files;
+      const { files } = request;
 
       if (!files || files.length === 0) {
         throw new BadRequestError("'files' invalid or not provided");
@@ -18,12 +19,12 @@ export class UploadLogsController implements IController {
 
       // TODO: Check if files are valid via mimetype
 
-      console.log((files as Express.Multer.File[])[0].buffer.toString());
+      const logRepository = new LogRepository();
+      const logService = new LogService(logRepository);
 
-      const logService = new LogService(new LogRepository());
-      await logService.parseAndSaveLogs(
-        (files as Express.Multer.File[])[0].buffer
-      );
+      for (const file of files as Express.Multer.File[]) {
+        await logService.parseAndSaveLogs(file.buffer);
+      }
 
       return response.status(201).send();
     } catch (error) {
