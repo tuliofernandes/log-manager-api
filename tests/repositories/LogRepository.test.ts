@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 import { connectDatabase } from "@/config/database/client";
-
 import { LogRepository } from "@/repositories/LogRepository";
 import { Log } from "@/models/Log";
 import { logsFixture } from "@/tests/fixtures/Log";
@@ -63,7 +62,7 @@ describe("[Repository] Log", () => {
       const endDate = new Date("2022-12-31");
       const messagePattern = "error";
 
-      await sut.findMany(startDate, endDate, messagePattern);
+      await sut.findMany({ startDate, endDate, messagePattern });
 
       const expectedFilter = {
         datetime: { $gte: startDate, $lte: endDate },

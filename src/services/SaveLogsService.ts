@@ -1,10 +1,7 @@
-import { ILog } from "../models/Log";
+import { ILog } from "@/interfaces/ILog";
+import { ISaveLogsService } from "../interfaces/ISaveLogsService";
 import { LogRepository } from "../repositories/LogRepository";
 import { parseDatetime } from "../utils/parseDatetime";
-
-interface ISaveLogsService {
-  parseAndSaveFromCsv(data: string): Promise<void>;
-}
 
 export class SaveLogsService implements ISaveLogsService {
   constructor(private readonly logRepository: LogRepository) {}
@@ -25,9 +22,7 @@ export class SaveLogsService implements ISaveLogsService {
     const logs: ILog[] = [];
 
     for (const line of lines) {
-      if (line.trim() === "") {
-        continue;
-      }
+      if (line.trim() === "") continue;
 
       const [ip, date, time, type, version, logId, title, description] =
         line.split(";");

@@ -1,21 +1,18 @@
 import { Request, Response } from "express";
 
+import { IController } from "../interfaces/IController";
+
 import { BadRequestError } from "../errors/BadRequestError";
 import { LogRepository } from "../repositories/LogRepository";
 import { SaveLogsService } from "../services/SaveLogsService";
-
-interface IController {
-  handle(request: Request, response: Response): Promise<Response>;
-}
 
 export class UploadLogsController implements IController {
   public async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { files } = request;
 
-      if (!files || files.length === 0) {
+      if (!files || files.length === 0)
         throw new BadRequestError("'files' invalid or not provided");
-      }
 
       // TODO: Check if files are valid via mimetype
 

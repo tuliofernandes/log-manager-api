@@ -1,4 +1,4 @@
-import { ILog } from "@/models/Log";
+import { ILog } from "@/interfaces/ILog";
 
 export const logsFixtureCsv = `
 109.76.175.111;27-Feb-2022;22:29:32.000;Sonsing;8.8;174766704-8;De-engineered optimizing forecast;in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non

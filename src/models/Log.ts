@@ -1,14 +1,6 @@
 import { Document, Schema, model } from "mongoose";
 
-export interface ILog {
-  logId: string;
-  ip: string;
-  datetime: Date;
-  type: string;
-  version: string;
-  title: string;
-  description: string;
-}
+import { ILog } from "../interfaces/ILog";
 
 export interface ILogDocument extends ILog, Document {}
 

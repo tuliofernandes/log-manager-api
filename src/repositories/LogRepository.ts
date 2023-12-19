@@ -1,7 +1,14 @@
 import { FilterQuery } from "mongoose";
 
 import { DatabaseError } from "../errors/DatabaseError";
-import { Log as LogSchema, ILog } from "../models/Log";
+import { Log as LogSchema } from "../models/Log";
+import { ILog } from "../interfaces/ILog";
+
+type LogsFilter = {
+  startDate: Date;
+  endDate: Date;
+  messagePattern?: string;
+};
 
 export class LogRepository {
   public async createMany(logs: ILog[]): Promise<void> {
@@ -12,18 +19,14 @@ export class LogRepository {
     }
   }
 
-  public async findMany(
-    startDate: Date,
-    endDate: Date,
-    messagePattern: string
-  ): Promise<ILog[]> {
+  public async findMany(filter: LogsFilter): Promise<ILog[]> {
     try {
-      const filter: FilterQuery<ILog> = {
-        datetime: { $gte: startDate, $lte: endDate },
-        description: { $regex: new RegExp(messagePattern, "i") },
+      const filterQuery: FilterQuery<ILog> = {
+        datetime: { $gte: filter.startDate, $lte: filter.endDate },
+        description: { $regex: new RegExp(filter.messagePattern ?? "", "i") },
       };
 
-      return await LogSchema.find(filter);
+      return await LogSchema.find(filterQuery);
     } catch (error) {
       throw new DatabaseError((error as Error).message);
     }
