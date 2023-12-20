@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 
 import { BadRequestError } from "../errors/BadRequestError";
 import { IController } from "../interfaces/IController";
+import { LogRepository } from "../repositories/LogRepository";
+import { GetLogsService } from "@/services/GetLogsService";
 
 export class QueryLogsController implements IController {
   public async handle(request: Request, response: Response): Promise<Response> {
@@ -17,7 +19,15 @@ export class QueryLogsController implements IController {
       if (messagePattern === "")
         throw new BadRequestError("'message_pattern' is invalid");
 
-      return response.status(200).send();
+      const logRepository = new LogRepository();
+      const getLogsService = new GetLogsService(logRepository);
+      const logs = await getLogsService.queryWithFilter(
+        startDate,
+        endDate,
+        messagePattern
+      );
+
+      return response.status(200).send(logs);
     } catch (error) {
       if ((error as Error).message.includes("BadRequestError")) {
         return response.status(400).json({
