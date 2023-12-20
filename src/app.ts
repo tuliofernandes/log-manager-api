@@ -5,6 +5,7 @@ import multer, { Multer } from "multer";
 import { connectDatabase } from "./config/database/client";
 import { UploadLogsController } from "./controllers/UploadLogsController";
 import { QueryLogsController } from "./controllers/QueryLogsController";
+import errorHandler from "./middlewares/errorHandler";
 
 export class App {
   public server: express.Application;
@@ -13,14 +14,15 @@ export class App {
   constructor() {
     this.server = express();
     this.database();
-    this.middlewares();
     this.upload();
     this.routes();
+    this.middlewares();
   }
 
   private middlewares() {
     this.server.use(express.json());
     this.server.use(morgan("dev"));
+    this.server.use(errorHandler);
   }
 
   private async database() {

@@ -1,12 +1,16 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
-import { BadRequestError } from "../errors/BadRequestError";
 import { IController } from "../interfaces/IController";
 import { LogRepository } from "../repositories/LogRepository";
 import { GetLogsService } from "../services/GetLogsService";
+import { BadRequestError } from "../errors/BadRequestError";
 
 export class QueryLogsController implements IController {
-  public async handle(request: Request, response: Response): Promise<Response> {
+  public async handle(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<Response | undefined> {
     try {
       const startDate = new Date(request.query.start_date as string);
       const endDate = new Date(request.query.end_date as string);
@@ -29,15 +33,7 @@ export class QueryLogsController implements IController {
 
       return response.status(200).send(logs);
     } catch (error) {
-      if ((error as Error).message.includes("BadRequestError")) {
-        return response.status(400).json({
-          error: (error as Error).message,
-        });
-      }
-
-      return response.status(500).json({
-        error: "Internal Server Error",
-      });
+      next(error);
     }
   }
 }

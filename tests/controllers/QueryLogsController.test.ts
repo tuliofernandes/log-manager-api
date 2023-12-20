@@ -73,7 +73,7 @@ describe("[Controller] QueryLogsController", () => {
       );
     });
 
-    it.only("should be able to return 200 OK with the logs returned by GetLogsService if all parameters are valid", async () => {
+    it("should be able to return 200 OK with the logs returned by GetLogsService if all parameters are valid", async () => {
       jest
         .spyOn(GetLogsService.prototype, "queryWithFilter")
         .mockResolvedValue(logsFixture);
