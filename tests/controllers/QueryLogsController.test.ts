@@ -2,6 +2,7 @@ import request from "supertest";
 
 import { App } from "@/app";
 import { GetLogsService } from "@/services/GetLogsService";
+import { logsFixture } from "../fixtures/Log";
 
 jest.mock("@/services/GetLogsService");
 
@@ -72,7 +73,11 @@ describe("[Controller] QueryLogsController", () => {
       );
     });
 
-    it("should be able to return 200 OK with the logs returned by GetLogsService if all parameters are valid", async () => {
+    it.only("should be able to return 200 OK with the logs returned by GetLogsService if all parameters are valid", async () => {
+      jest
+        .spyOn(GetLogsService.prototype, "queryWithFilter")
+        .mockResolvedValue(logsFixture);
+
       const response = await request(app.server).get(routeUrl).query({
         start_date: startDate,
         end_date: endDate,
@@ -80,6 +85,7 @@ describe("[Controller] QueryLogsController", () => {
       });
 
       expect(response.status).toBe(200);
+      expect(response.body).toEqual(logsFixture);
     });
   });
 });

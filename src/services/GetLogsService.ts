@@ -9,10 +9,11 @@ export class GetLogsService implements IGetLogsService {
     endDate: Date,
     messagePattern: string = ""
   ) {
+    const pattern = new RegExp(messagePattern, "i");
     const logs = await this.logRepository.findMany({
       startDate,
       endDate,
-      messagePattern,
+      messagePattern: pattern,
     });
 
     return logs;

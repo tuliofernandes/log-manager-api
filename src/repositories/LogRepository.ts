@@ -7,7 +7,7 @@ import { ILog } from "../interfaces/ILog";
 type LogsFilter = {
   startDate: Date;
   endDate: Date;
-  messagePattern?: string;
+  messagePattern?: RegExp;
 };
 
 export class LogRepository {
@@ -23,7 +23,7 @@ export class LogRepository {
     try {
       const filterQuery: FilterQuery<ILog> = {
         datetime: { $gte: filter.startDate, $lte: filter.endDate },
-        description: { $regex: new RegExp(filter.messagePattern ?? "", "i") },
+        description: { $regex: filter.messagePattern },
       };
 
       return await LogSchema.find(filterQuery);

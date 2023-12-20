@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { BadRequestError } from "../errors/BadRequestError";
 import { IController } from "../interfaces/IController";
 import { LogRepository } from "../repositories/LogRepository";
-import { GetLogsService } from "@/services/GetLogsService";
+import { GetLogsService } from "../services/GetLogsService";
 
 export class QueryLogsController implements IController {
   public async handle(request: Request, response: Response): Promise<Response> {

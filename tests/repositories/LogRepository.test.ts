@@ -60,13 +60,13 @@ describe("[Repository] Log", () => {
       const findSpy = jest.spyOn(Log, "find");
       const startDate = new Date("2022-01-01");
       const endDate = new Date("2022-12-31");
-      const messagePattern = "error";
+      const messagePattern = new RegExp("error", "i");
 
       await sut.findMany({ startDate, endDate, messagePattern });
 
       const expectedFilter = {
         datetime: { $gte: startDate, $lte: endDate },
-        description: { $regex: new RegExp(messagePattern, "i") },
+        description: { $regex: messagePattern },
       };
 
       expect(findSpy).toHaveBeenCalledWith(expectedFilter);
