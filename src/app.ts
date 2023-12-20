@@ -4,6 +4,7 @@ import multer, { Multer } from "multer";
 
 import { connectDatabase } from "./config/database/client";
 import { UploadLogsController } from "./controllers/UploadLogsController";
+import { QueryLogsController } from "./controllers/QueryLogsController";
 
 export class App {
   public server: express.Application;
@@ -40,6 +41,8 @@ export class App {
         health: "healthy",
       });
     });
+
+    this.server.get("/logs", new QueryLogsController().handle);
 
     this.server.post(
       "/logs",
