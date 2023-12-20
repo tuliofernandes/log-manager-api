@@ -3,6 +3,7 @@ import { FilterQuery } from "mongoose";
 import { DatabaseError } from "../errors/DatabaseError";
 import { Log as LogSchema } from "../models/Log";
 import { ILog } from "../interfaces/ILog";
+import { ILogRepository } from "../interfaces/ILogRepository";
 
 type LogsFilter = {
   startDate: Date;
@@ -10,7 +11,7 @@ type LogsFilter = {
   messagePattern?: RegExp;
 };
 
-export class LogRepository {
+export class LogRepository implements ILogRepository {
   public async createMany(logs: ILog[]): Promise<void> {
     try {
       await LogSchema.insertMany(logs);

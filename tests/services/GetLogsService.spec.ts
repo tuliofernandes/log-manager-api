@@ -30,7 +30,7 @@ describe("[Service] GetLogsService", () => {
       expect(findManySpy).toHaveBeenCalledWith({
         startDate,
         endDate,
-        messagePattern,
+        messagePattern: new RegExp(messagePattern, "i"),
       });
     });
 

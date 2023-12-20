@@ -1,8 +1,8 @@
+import { ILogRepository } from "../interfaces/ILogRepository";
 import { IGetLogsService } from "../interfaces/IGetLogsService";
-import { LogRepository } from "../repositories/LogRepository";
 
 export class GetLogsService implements IGetLogsService {
-  constructor(private readonly logRepository: LogRepository) {}
+  constructor(private readonly logRepository: ILogRepository) {}
 
   async queryWithFilter(
     startDate: Date,

@@ -1,10 +1,10 @@
 import { ILog } from "@/interfaces/ILog";
 import { ISaveLogsService } from "../interfaces/ISaveLogsService";
-import { LogRepository } from "../repositories/LogRepository";
 import { parseDatetime } from "../utils/parseDatetime";
+import { ILogRepository } from "../interfaces/ILogRepository";
 
 export class SaveLogsService implements ISaveLogsService {
-  constructor(private readonly logRepository: LogRepository) {}
+  constructor(private readonly logRepository: ILogRepository) {}
 
   // TODO: tratar erros
 
