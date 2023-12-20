@@ -53,7 +53,7 @@ describe("[Controller] QueryLogsController", () => {
       });
     });
 
-    it.skip("should be able to call QueryLogsService.findMany with the correct parameters", async () => {
+    it("should be able to call QueryLogsService.findMany with the correct parameters", async () => {
       const findManySpy = jest.spyOn(
         GetLogsService.prototype,
         "queryWithFilter"
@@ -72,7 +72,7 @@ describe("[Controller] QueryLogsController", () => {
       );
     });
 
-    it.skip("should be able to return 200 OK with the logs returned by GetLogsService if all parameters are valid", async () => {
+    it("should be able to return 200 OK with the logs returned by GetLogsService if all parameters are valid", async () => {
       const response = await request(app.server).get(routeUrl).query({
         start_date: startDate,
         end_date: endDate,
