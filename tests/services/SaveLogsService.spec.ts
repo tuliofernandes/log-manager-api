@@ -4,7 +4,7 @@ import { logsFixture, logsFixtureCsv } from "@/tests/fixtures/Log";
 
 jest.mock("@/repositories/LogRepository");
 
-describe("[Service] LogService", () => {
+describe("[Service] SaveLogsService", () => {
   let saveLogsService: SaveLogsService;
   let logRepository: LogRepository;
 
