@@ -4,12 +4,7 @@ import { DatabaseError } from "../errors/DatabaseError";
 import { Log as LogSchema } from "../models/Log";
 import { ILog } from "../interfaces/ILog";
 import { ILogRepository } from "../interfaces/ILogRepository";
-
-type LogsFilter = {
-  startDate: Date;
-  endDate: Date;
-  messagePattern?: RegExp;
-};
+import { LogFilter } from "../types/LogFilter";
 
 export class LogRepository implements ILogRepository {
   public async createMany(logs: ILog[]): Promise<void> {
@@ -20,7 +15,7 @@ export class LogRepository implements ILogRepository {
     }
   }
 
-  public async findMany(filter: LogsFilter): Promise<ILog[]> {
+  public async findMany(filter: LogFilter): Promise<ILog[]> {
     try {
       const filterQuery: FilterQuery<ILog> = {
         datetime: { $gte: filter.startDate, $lte: filter.endDate },
