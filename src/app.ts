@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import morgan from "morgan";
 import multer, { Multer } from "multer";
+import cors from "cors";
 
 import { connectDatabase } from "./config/database/client";
 import { UploadLogsController } from "./controllers/UploadLogsController";
@@ -15,13 +16,14 @@ export class App {
     this.server = express();
     this.database();
     this.upload();
-    this.routes();
     this.middlewares();
+    this.routes();
   }
 
   private middlewares() {
     this.server.use(express.json());
     this.server.use(morgan("dev"));
+    this.server.use(cors());
     this.server.use(errorHandler);
   }
 
