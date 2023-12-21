@@ -1,3 +1,4 @@
+import { LogFilter } from "../types/LogFilter";
 import { ILog } from "./ILog";
 
 export interface ILogRepository {
