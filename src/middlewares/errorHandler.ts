@@ -13,6 +13,7 @@ function errorHandler(
     });
   }
 
+  // Omit sensitive errors from the response
   return response.status(500).json({
     error: "Internal Server Error",
   });
