@@ -6,8 +6,6 @@ import { ILogRepository } from "../interfaces/ILogRepository";
 export class SaveLogsService implements ISaveLogsService {
   constructor(private readonly logRepository: ILogRepository) {}
 
-  // TODO: tratar erros
-
   public async parseAndSaveFromCsv(data: string | Buffer): Promise<void> {
     const logs = await this.parseLogs(data.toString());
     await this.saveLogs(logs);
