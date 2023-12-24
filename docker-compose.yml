@@ -2,19 +2,21 @@ version: "3"
 
 services:
   api:
-    build: .
-    container_name: "log-manager-service"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: log-manager-api
+    environment:
+      - DATABASE_URL=mongodb://test:test@db:27017/test
     ports:
       - "3000:3000"
     depends_on:
       - db
     links:
       - db
-    environment:
-      - MONGODB_URI=mongodb://mongo:27017/log-manager
 
   db:
-    container_name: mongo
+    container_name: log-manager-db
     image: mongo
     volumes:
       - ./data:/data/db

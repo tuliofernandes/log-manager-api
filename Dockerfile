@@ -1,6 +1,6 @@
 FROM node:18
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -8,6 +8,10 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-CMD [ "npm", "start" ]
+WORKDIR /app/dist/src
+
+RUN ls /app/dist/src
+
+CMD ["node", "index.js"]
